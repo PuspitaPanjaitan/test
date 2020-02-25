@@ -98,18 +98,20 @@ class Outbox_model extends CI_model
     {
         $this->db->select(" k.id as id_keluar, k.id_supplier as id_supplier, k.modified_by as petugas, k.keterangan as ket, 
                             k.id_obat as id_obat, d.nama_obat as nama_obat, s.nama_supplier as nama_supplier, d.id as id_obat,
-                            s.no_bas as no_bas, s.tgl_bas as tgl_bas, e.kepada as kepada, d.harga as harga, k.tanggal as tanggal")
-            ->from("barang_keluar as k")
-            ->join("detail_obat as d", "k.id_obat = d.id", "left")
-            ->join("supplier as s", "k.id_supplier = s.id", "left")
-            ->join("aksi_outbox as a", "a.id_outbox =  k.id", "left")
-            ->join("kepada as e", "k.kepada =  e.id", "left");
+                            s.no_bas as no_bas, s.tgl_bas as tgl_bas, e.kepada as kepada, d.harga as harga, k.tanggal as tanggal");
+        $this->db->from("barang_keluar as k");
+        $this->db->join("detail_obat as d", "k.id_obat = d.id", "left");
+        $this->db->join("supplier as s", "k.id_supplier = s.id", "left");
+        $this->db->join("aksi_outbox as a", "a.id_outbox =  k.id", "left");
+        $this->db->join("kepada as e", "k.kepada =  e.id", "left");
+        $this->db->group_by("k.id_obat");
 
         $this->db->limit($limit, $start);
         $query = $this->db->get();
         $data = $query->result_array();
         return $data;
     }
+
 
     public function countData()
     {

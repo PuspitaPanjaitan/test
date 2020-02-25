@@ -13,28 +13,38 @@
                 </div>
             <?php endif; ?>
 
-            <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newInboxModal"> Tambah Barang Masuk</a>
-
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Kode Obat</th>
                         <th scope="col">Nama Obat</th>
+                        <th scope="col">Harga</th>
+                        <th scope="col">Stok Awal</th>
+                        <th scope="col">Stok Awal</th>
                         <th scope="col">Barang Masuk</th>
+                        <th scope="col">Total</th>
                         <th scope="col">Barang Keluar</th>
+                        <th scope="col">Total</th>
                         <th scope="col">Sisa Stok</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <?php $i = 1; ?>
-                    <?php foreach ($gudang as $gdg) : ?>
+                    <?php foreach ($transaksi as $t) : ?>
                         <tr>
                             <th scope="row"><?= $i; ?></th>
-                            <td><?= $ibx['nama_obat']; ?></td>
-                            <td><?= $ibx['inbox']; ?></td>
-                            <td><?= $ibx['outbox']; ?></td>
-                            <td><?= $ibx['sisa']; ?></td>
+                            <td><?= $t['kode_obat']; ?></td>
+                            <td><?= $t['nama_obat']; ?></td>
+                            <td><?= $t['harga']; ?></td>
+                            <td><?= $t['jumlah_awal']; ?></td>
+                            <td><?= $t['total_awal']; ?></td>
+                            <td><?= $t['jumlah_masuk']; ?></td>
+                            <td><?= $t['total_inbox']; ?></td>
+                            <td><?= $t['jumlah_keluar']; ?></td>
+                            <td><?= $t['total_outbox']; ?></td>
+                            <td><?= $t['sisa_stok']; ?></td>
                         </tr>
                         <?php $i++; ?>
                     <?php endforeach; ?>

@@ -122,10 +122,11 @@ class Awal_model extends CI_model
                              d.id as id_obat, d.id_supplier as id_supplier,  
                              d.harga as harga, d.id_satuan as id_satuan, d.kode_obat as kode_obat,
                              d.nama_obat as nama_obat,
-                             s.nama_supplier as nama_supplier")
-            ->from("awal as a")
-            ->join("supplier as s", "a.id_supplier = s.id", "left")
-            ->join("detail_obat as d", "a.id_obat = d.id", "left");
+                             s.nama_supplier as nama_supplier");
+        $this->db->from("awal as a");
+        $this->db->join("supplier as s", "a.id_supplier = s.id", "left");
+        $this->db->join("detail_obat as d", "a.id_obat = d.id", "left");
+        $this->db->group_by("a.id_obat");
 
         $this->db->limit($limit, $start);
         $query = $this->db->get();

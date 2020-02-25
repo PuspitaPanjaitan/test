@@ -109,11 +109,13 @@ class Inbox_model extends CI_model
 
         $this->db->select("b.id as id_masuk, b.tanggal as tanggal, b.modified_by as petugas, b.keterangan as ket,
                             d.nama_obat as nama_obat, s.nama_supplier as nama_supplier, d.id as id_obat,
-                             b.tahun_pembuatan as tahun_pembuatan, b.anggaran as anggaran, d.harga as harga")
-            ->from("barang_masuk as b")
-            ->join("detail_obat as d", "b.id_obat = d.id", "left")
-            ->join("supplier as s", "b.id_supplier = s.id", "left")
-            ->join("aksi_inbox as a", "a.id_inbox =  b.id", "left");
+                             b.tahun_pembuatan as tahun_pembuatan, b.anggaran as anggaran, d.harga as harga,
+                             jumlah as jumlah");
+        $this->db->from("barang_masuk as b");
+        $this->db->join("detail_obat as d", "b.id_obat = d.id", "left");
+        $this->db->join("supplier as s", "b.id_supplier = s.id", "left");
+        $this->db->join("aksi_inbox as a", "a.id_inbox =  b.id", "left");
+        $this->db->group_by("b.id_obat");
 
         $this->db->limit($limit, $start);
         $query = $this->db->get();

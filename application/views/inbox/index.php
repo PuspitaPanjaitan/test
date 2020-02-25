@@ -190,7 +190,11 @@
                     <div class="modal-body">
                         <input type="hidden" id="id_masuk" name="id_masuk" value="<?= $ibx['id_masuk']; ?>" />
                         <div class="form-group">
-                            <input type="text" class="form-control" id="id_obat" name="id_obat" value="<?= $ibx['nama_obat']; ?>">
+                            <select name="id_obat" id="id_obat" class="form-control">
+                                <?php foreach ($obat as $obt) : ?>
+                                    <option value=" <?= $obt['id']; ?>"><?= $obt['nama_obat']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="petugas" name="petugas" value="<?= $ibx['petugas']; ?>">
